@@ -12,3 +12,8 @@ data/*
 # Local warehouse
 *.duckdb
 *.duckdb.wal
+
+# dbt artefacts
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/

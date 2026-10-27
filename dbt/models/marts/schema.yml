@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_team
+    description: Team dimension.
+    columns:
+      - name: team_id
+        data_tests: [unique, not_null]
+
+  - name: dim_player
+    description: Player dimension with team and position names resolved.
+    columns:
+      - name: player_id
+        data_tests: [unique, not_null]
+      - name: team_name
+        data_tests: [not_null]
+      - name: position
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["GKP", "DEF", "MID", "FWD"]
+
+  - name: mart_player_value
+    description: Points per £m for every player who has played minutes this season.
+    columns:
+      - name: player_id
+        data_tests: [unique, not_null]
+      - name: points_per_million
+        data_tests: [not_null]
+
+  - name: mart_fixture_difficulty
+    description: Average difficulty of each team's next five fixtures.
+    columns:
+      - name: team_id
+        data_tests: [unique, not_null]
+      - name: avg_difficulty
+        data_tests: [not_null]

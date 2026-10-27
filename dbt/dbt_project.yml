@@ -1,0 +1,19 @@
+name: fpl
+version: "0.1.0"
+config-version: 2
+profile: fpl
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+
+# Where the extract step landed the Parquet files (relative to this dbt/ folder).
+vars:
+  parquet_dir: "../data/parquet"
+
+models:
+  fpl:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

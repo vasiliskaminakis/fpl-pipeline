@@ -11,6 +11,9 @@ dependencies = [
     "requests>=2.31",
     "pandas>=2.1",
     "pyarrow>=14.0",
+    "duckdb>=1.0",
+    "dbt-core>=1.10",
+    "dbt-duckdb>=1.9",
 ]
 
 [project.optional-dependencies]

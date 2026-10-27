@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_players
+    description: One row per player (latest daily snapshot), cleaned and typed.
+    columns:
+      - name: player_id
+        data_tests: [unique, not_null]
+      - name: team_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_teams')
+                field: team_id
+      - name: position_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_positions')
+                field: position_id
+      - name: price_m
+        description: Price in £ millions (the API reports tenths of a million).
+
+  - name: stg_teams
+    description: One row per Premier League team (latest daily snapshot).
+    columns:
+      - name: team_id
+        data_tests: [unique, not_null]
+
+  - name: stg_positions
+    description: One row per player position.
+    columns:
+      - name: position_id
+        data_tests: [unique, not_null]
+
+  - name: stg_gameweeks
+    description: One row per gameweek (latest daily snapshot).
+    columns:
+      - name: gameweek_id
+        data_tests: [unique, not_null]
+
+  - name: stg_fixtures
+    description: One row per fixture (latest daily snapshot).
+    columns:
+      - name: fixture_id
+        data_tests: [unique, not_null]
+      - name: home_team_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_teams')
+                field: team_id
+      - name: away_team_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_teams')
+                field: team_id

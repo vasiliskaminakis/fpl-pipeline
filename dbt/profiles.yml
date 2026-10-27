@@ -1,0 +1,8 @@
+fpl:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # The whole warehouse is a single file. Run dbt from inside the dbt/ folder.
+      path: "{{ env_var('DUCKDB_PATH', '../data/warehouse.duckdb') }}"
+      threads: 4
